@@ -1,0 +1,15 @@
+# setup
+setuptools
+wheel
+
+# tests
+pytest
+pytest-cov
+
+# code quality
+black
+isort 
+flake8
+flake8-isort
+flake8-docstrings
+mypy
