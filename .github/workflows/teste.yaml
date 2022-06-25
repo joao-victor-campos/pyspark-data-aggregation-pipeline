@@ -1,0 +1,23 @@
+name: "Tests"
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  Pipeline:
+    runs-on: ubuntu-20.04
+    container: python:3.10.4
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: make requirements
+
+    - name: Checks
+      run: make checks
+
+    - name: Tests
+      run: make tests-coverage
