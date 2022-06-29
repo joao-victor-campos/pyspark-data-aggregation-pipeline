@@ -1,4 +1,3 @@
-from pyparsing import Optional
 from pyspark.sql import SparkSession
 
 # class SparkClient:
@@ -7,6 +6,11 @@ from pyspark.sql import SparkSession
 
 
 def CreateSession() -> SparkSession:
+    """Creates a Spark Session.
+
+    Returns:
+        Spark session.
+    """
     # if not self._session:
     session = SparkSession.builder.appName("aggregation").getOrCreate()
     return session
