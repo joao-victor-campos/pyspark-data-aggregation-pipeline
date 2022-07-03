@@ -1,5 +1,6 @@
-from spark_pipeline.base.spark_client import CreateSession
 from pyspark.sql import DataFrame, functions
+
+from spark_pipeline.base.spark_client import CreateSession
 
 QUERY = """
 SELECT
