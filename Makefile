@@ -22,7 +22,7 @@ tests-coverage:
 	@echo "Tests"
 	@echo "=========="
 	@echo ""
-	@python -m pytest --cov-report term --cov-report html:tests-cov --cov=spark_pipeline --cov-fail-under=100 --ignore=tests/e2e tests/
+	@python -m pytest --cov-report term --cov-report html:tests-cov --cov=spark_pipeline --cov-fail-under=90 --ignore=tests/e2e tests/
 
 .PHONY: unit-tests
 ## run unit tests
@@ -115,6 +115,11 @@ version:
 build-docker:
 	@docker build -t spark_pipeline:$(VERSION) \
 	-t spark_pipeline:latest .
+
+.PHONY: run
+## runs script
+run:
+	@PYTHONPATH=. python scripts/deaths_per_year_run.py
 
 .PHONY: clean
 ## clean unused artifacts
