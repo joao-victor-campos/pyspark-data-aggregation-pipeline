@@ -1,4 +1,4 @@
-from spark_pipeline.deaths_per_year import extract, load, transform
+from deaths_per_year import extract, load, transform
 
 
 def main() -> None:
