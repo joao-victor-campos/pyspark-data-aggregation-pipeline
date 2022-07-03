@@ -1,5 +1,6 @@
-from base.spark_client import CreateSession
 from pyspark.sql import DataFrame, functions
+
+from spark_pipeline.base.spark_client import CreateSession
 
 QUERY = """
 SELECT
@@ -18,7 +19,7 @@ def extract() -> DataFrame:
         Spark DataFrame
     """
     CreateSession().read.load(
-        "/home/nicholasbaraldi/repos/pyspark-data-aggregation-pipeline/data/AgeDataset-V1.csv",
+        "data/AgeDataset-V1.csv",
         format="csv",
         inferSchema="true",
         header="true",
@@ -35,12 +36,12 @@ def transform(df: DataFrame) -> DataFrame:
     Returns:
         DataFrame: Aggregated DataFrame
     """
-    df_blank = df.fillna("Blank", subset=["Death_year"]).select("Id", "Death_year")
+    df_blank = df.fillna("Blank", subset=["Death_year"]).select(functions.col("Id"), functions.col("Death_year").cast("int"))
 
     agg_df = (
         df_blank.groupBy("Death_year")
         .agg(functions.count(functions.col("Id")).alias("total_deaths"))
-        .select("Death_year", "total_deaths")
+        .select("Death_year", "total_deaths").orderBy("Death_year")
     )
     return agg_df
 
@@ -51,9 +52,5 @@ def load(df: DataFrame) -> None:
     Args:
         df (DataFrame): Aggregated DataFrame
     """
-    df.write.parquet(
-        "/home/nicholasbaraldi/repos/pyspark-data-aggregation-pipeline/data/output"
-    )
-
-
-load(transform(extract()))
+    df.coalesce(1).write.parquet("data/output", mode = 'overwrite')
+    return None
