@@ -36,12 +36,15 @@ def transform(df: DataFrame) -> DataFrame:
     Returns:
         DataFrame: Aggregated DataFrame
     """
-    df_blank = df.fillna("Blank", subset=["Death_year"]).select(functions.col("Id"), functions.col("Death_year").cast("int"))
+    df_blank = df.fillna("Blank", subset=["Death_year"]).select(
+        functions.col("Id"), functions.col("Death_year").cast("int")
+    )
 
     agg_df = (
         df_blank.groupBy("Death_year")
         .agg(functions.count(functions.col("Id")).alias("total_deaths"))
-        .select("Death_year", "total_deaths").orderBy("Death_year")
+        .select("Death_year", "total_deaths")
+        .orderBy("Death_year")
     )
     return agg_df
 
@@ -52,5 +55,5 @@ def load(df: DataFrame) -> None:
     Args:
         df (DataFrame): Aggregated DataFrame
     """
-    df.coalesce(1).write.parquet("data/output", mode = 'overwrite')
+    df.coalesce(1).write.parquet("data/output", mode="overwrite")
     return None
