@@ -116,6 +116,11 @@ build-docker:
 	@docker build -t spark_pipeline:$(VERSION) \
 	-t spark_pipeline:latest .
 
+.PHONY: run
+## runs script
+run:
+	@PYTHONPATH=. python scripts/deaths_per_year_run.py
+
 .PHONY: clean
 ## clean unused artifacts
 clean:
