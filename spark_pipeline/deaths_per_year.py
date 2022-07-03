@@ -1,4 +1,4 @@
-from base.spark_client import CreateSession
+from spark_pipeline.base.spark_client import CreateSession
 from pyspark.sql import DataFrame, functions
 
 QUERY = """
