@@ -17,4 +17,4 @@ def test_transform():
 
 
 def test_load():
-    assert type(load(transform(extract()))) is None
+    assert load(transform(extract())) is None
