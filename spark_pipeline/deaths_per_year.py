@@ -1,6 +1,7 @@
 from pyspark.sql import DataFrame, functions
 
-from spark_pipeline.base.spark_client import CreateSession
+from spark_pipeline.base.read_write import read_csv, write_csv
+from spark_pipeline.base.spark_client import SparkClient
 
 QUERY = """
 SELECT
@@ -18,13 +19,8 @@ def extract() -> DataFrame:
     Returns:
         Spark DataFrame
     """
-    CreateSession().read.load(
-        "data/AgeDataset-V1.csv",
-        format="csv",
-        inferSchema="true",
-        header="true",
-    ).createOrReplaceTempView("deaths")
-    return CreateSession().sql(QUERY)
+    read_csv("data/AgeDataset-V1.csv", header="true").createOrReplaceTempView("deaths")
+    return SparkClient().Session().sql(QUERY)
 
 
 def transform(df: DataFrame) -> DataFrame:
@@ -36,9 +32,7 @@ def transform(df: DataFrame) -> DataFrame:
     Returns:
         DataFrame: Aggregated DataFrame
     """
-    df_blank = df.fillna("Blank", subset=["Death_year"]).select(
-        functions.col("Id"), functions.col("Death_year").cast("int")
-    )
+    df_blank = df.select(functions.col("Id"), functions.col("Death_year").cast("int"))
 
     agg_df = (
         df_blank.groupBy("Death_year")
@@ -55,5 +49,5 @@ def load(df: DataFrame) -> None:
     Args:
         df (DataFrame): Aggregated DataFrame
     """
-    df.coalesce(1).write.parquet("data/output", mode="overwrite")
+    write_csv(df, "data/output")
     return None
