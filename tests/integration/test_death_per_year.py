@@ -1,11 +1,6 @@
-from pyspark.sql import DataFrame, SparkSession
+from pyspark.sql import DataFrame
 
-from spark_pipeline.base.spark_client import SparkClient
 from spark_pipeline.deaths_per_year import extract, load, transform
-
-
-def test_spark_client():
-    assert type(SparkClient().Session()) == SparkSession
 
 
 def test_extract():

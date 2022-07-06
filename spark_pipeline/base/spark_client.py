@@ -9,17 +9,17 @@ class SparkClient:
     def __init__(self, session: Optional[SparkSession] = None) -> None:
         self._session = session
 
-    def Session(self) -> SparkSession:
+    def session(self) -> SparkSession:
         """Get a created SparkSession or if it doesn't exist create one.
 
         Returns:
             Spark session.
         """
         if not self._session:
-            self._session = self.CreateSession()
+            self._session = self.create_session()
         return self._session
 
-    def CreateSession(self) -> SparkSession:
+    def create_session(self) -> SparkSession:
         """Creates a Spark Session.
 
         Returns:

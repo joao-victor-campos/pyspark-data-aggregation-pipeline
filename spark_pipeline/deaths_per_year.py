@@ -20,7 +20,7 @@ def extract() -> DataFrame:
         Spark DataFrame
     """
     read_csv("data/AgeDataset-V1.csv", header="true").createOrReplaceTempView("deaths")
-    return SparkClient().Session().sql(QUERY)
+    return SparkClient().session().sql(QUERY)
 
 
 def transform(df: DataFrame) -> DataFrame:
@@ -32,15 +32,22 @@ def transform(df: DataFrame) -> DataFrame:
     Returns:
         DataFrame: Aggregated DataFrame
     """
-    df_blank = df.select(functions.col("Id"), functions.col("Death_year").cast("int"))
+    df_cast = df.select(
+        functions.col("Id"), functions.col("Death_year").alias("death_year").cast("int")
+    )
 
     agg_df = (
-        df_blank.groupBy("Death_year")
+        df_cast.groupBy("death_year")
         .agg(functions.count(functions.col("Id")).alias("total_deaths"))
-        .select("Death_year", "total_deaths")
-        .orderBy("Death_year")
+        .select("death_year", "total_deaths")
+        .orderBy("death_year")
     )
-    return agg_df
+
+    df_blank_agg = agg_df.select(
+        functions.col("total_deaths"), functions.col("death_year").cast("string")
+    ).fillna("Blank")
+
+    return df_blank_agg
 
 
 def load(df: DataFrame) -> None:
