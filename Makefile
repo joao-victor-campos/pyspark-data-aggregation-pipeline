@@ -22,7 +22,7 @@ tests-coverage:
 	@echo "Tests"
 	@echo "=========="
 	@echo ""
-	@python -m pytest --cov-report term --cov-report html:tests-cov --cov=spark_pipeline --cov-fail-under=90 --ignore=tests/e2e tests/
+	@python -m pytest -W ignore::DeprecationWarning --cov-report term --cov-report html:tests-cov --cov=spark_pipeline --cov-fail-under=90 --ignore=tests/e2e tests/
 
 .PHONY: unit-tests
 ## run unit tests

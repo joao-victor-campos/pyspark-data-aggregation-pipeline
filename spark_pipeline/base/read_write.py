@@ -22,7 +22,7 @@ def read_csv(
     """
     return (
         SparkClient()
-        .Session()
+        .session()
         .read.load(path=path, format="csv", inferSchema="true", header=header)
     )
 
