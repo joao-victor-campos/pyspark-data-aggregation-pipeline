@@ -1,3 +1,6 @@
+import glob
+import os
+
 from pyspark.sql import DataFrame, functions
 
 from spark_pipeline.base.read_write import read_csv, write_csv
@@ -56,5 +59,9 @@ def load(df: DataFrame) -> None:
     Args:
         df (DataFrame): Aggregated DataFrame
     """
+    dir = "data/output"
+    filelist = glob.glob(os.path.join(dir, "*"))
+    for f in filelist:
+        os.remove(f)
     write_csv(df, "data/output")
     return None
