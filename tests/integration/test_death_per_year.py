@@ -27,7 +27,12 @@ def test_pipeline():
             StructField("death_year", StringType(), True),
         ]
     )
-    df2 = spark.read.load(path = "tests/integration/expected_output.csv", format= "csv", schema=schema, header = "true")
+    df2 = spark.read.load(
+        path="tests/integration/expected_output.csv",
+        format="csv",
+        schema=schema,
+        header="true",
+    )
     assert df1.collect() == df2.collect()
     load(df1)
     if len(os.listdir("data/output")) != 0:
