@@ -1,0 +1,17 @@
+name: "Docker Image"
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  Pipeline:
+    runs-on: ubuntu-20.04
+    container: docker
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Build Image
+      run: docker build --tag pyspark-data-aggregation-pipeline .
