@@ -2,14 +2,16 @@
 # Pyspark Data Aggregation Pipeline
 ![Python Version](https://img.shields.io/badge/python-3.10-green)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![aa](https://img.shields.io/badge/code%20quality-flake8-blue)](https://github.com/PyCQA/flake8)
+[![Flake8](https://img.shields.io/badge/code%20quality-flake8-blue)](https://github.com/PyCQA/flake8)
+[![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
 [![Checked with mypy](https://camo.githubusercontent.com/59eab954a267c6e9ff1d80e8055de43a0ad771f5e1f3779aef99d111f20bee40/687474703a2f2f7777772e6d7970792d6c616e672e6f72672f7374617469632f6d7970795f62616467652e737667)](http://mypy-lang.org/)
+[![pytest coverage: 100%](https://img.shields.io/badge/pytest%20coverage-100%25-green)](https://github.com/pytest-dev/pytest)
 
 [Build Status](https://github.com/joao-victor-campos/pyspark-data-aggregation-pipeline/actions):
 
-| Core     | Docker Image 
-| -------- | -------- 
-| [![Tests](https://github.com/joao-victor-campos/pyspark-data-aggregation-pipeline/actions/workflows/teste.yaml/badge.svg)](https://github.com/joao-victor-campos/pyspark-data-aggregation-pipeline/actions/workflows/teste.yaml)     | [![Docker Image](https://github.com/joao-victor-campos/pyspark-data-aggregation-pipeline/actions/workflows/docker_image.yaml/badge.svg)](https://github.com/joao-victor-campos/pyspark-data-aggregation-pipeline/actions/workflows/docker_image.yaml)    
+| Core                                                                                                                                                                                                                             | Docker Image                                                                                                                                                                                                                                          |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [![Tests](https://github.com/joao-victor-campos/pyspark-data-aggregation-pipeline/actions/workflows/teste.yaml/badge.svg)](https://github.com/joao-victor-campos/pyspark-data-aggregation-pipeline/actions/workflows/teste.yaml) | [![Docker Image](https://github.com/joao-victor-campos/pyspark-data-aggregation-pipeline/actions/workflows/docker_image.yaml/badge.svg)](https://github.com/joao-victor-campos/pyspark-data-aggregation-pipeline/actions/workflows/docker_image.yaml) |
 
 ## Introduction
 Repo to save our pyspark pipeline project. Created with the intention to put to life our studies in python, pyspark,  ETL process and software engineering skills in general, such as units and integration test, CI, Docker and code quality.
@@ -63,13 +65,7 @@ Integration tests:
 ```bash
 make integration-tests
 ```
-All (unit + integration) tests:
-```bash
-make tests
-```
-
-Test coverage:
+All (unit + integration) tests with coverage report:
 ```bash
 make tests-coverage
 ```
-
