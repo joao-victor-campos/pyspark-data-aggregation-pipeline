@@ -10,7 +10,7 @@ CURRENT_PATH = pathlib.Path(__file__).parent.resolve()
 
 
 @mock.patch("spark_pipeline.base.read_write.write_csv", autospec=True)
-def test_pipeline(mock_write_jdbc: mock.Mock):
+def test_pipeline(mock_write_csv: mock.Mock):
     # arrange
     spark = SparkSession.builder.getOrCreate()
     schema = StructType(
@@ -31,8 +31,8 @@ def test_pipeline(mock_write_jdbc: mock.Mock):
 
     # act
     deaths_per_year_pipeline.run(pipeline)
-    output_df: DataFrame = mock_write_jdbc.call_args.kwargs["df"]
+    output_df: DataFrame = mock_write_csv.call_args.kwargs["df"]
 
     # assert
     assert sorted(output_df.collect()) == sorted(expected_df.collect())
-    assert mock_write_jdbc.call_args.kwargs["mode"] == "overwrite"
+    assert mock_write_csv.call_args.kwargs["mode"] == "overwrite"
