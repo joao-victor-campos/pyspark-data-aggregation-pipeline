@@ -12,7 +12,7 @@
 | [![Tests](https://github.com/joao-victor-campos/pyspark-data-aggregation-pipeline/actions/workflows/teste.yaml/badge.svg)](https://github.com/joao-victor-campos/pyspark-data-aggregation-pipeline/actions/workflows/teste.yaml)     | [![Docker Image](https://github.com/joao-victor-campos/pyspark-data-aggregation-pipeline/actions/workflows/docker_image.yaml/badge.svg)](https://github.com/joao-victor-campos/pyspark-data-aggregation-pipeline/actions/workflows/docker_image.yaml)    
 
 ## Introduction
-Repo to save our pyspark pipeline project. Created with the intention to put to life our studies in python, pyspark,  ETL process and software engineering skills in geral, such as units and integration test, CI, Docker and code quality in general.
+Repo to save our pyspark pipeline project. Created with the intention to put to life our studies in python, pyspark,  ETL process and software engineering skills in geral, such as units and integration test, CI, Docker and code quality.
 
 ## Running the pipeline
 
