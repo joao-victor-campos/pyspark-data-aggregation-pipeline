@@ -8,7 +8,7 @@ class DeathsPerYearPipeline:
 
     def __init__(
         self,
-        input_path: str = "data/AgeDataset-V1.csv",
+        input_path: str = "data/input/AgeDataset-V1.csv",
         output_path: str = "data/output",
     ):
         self.input_path = input_path
