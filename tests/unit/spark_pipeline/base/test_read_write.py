@@ -32,6 +32,6 @@ def test_read_csv() -> None:
 def test_write_csv(mock_load: Mock) -> None:
     input = [{"test": 1, "test_2": 2}, {"test": 1, "test_2": 2}]
     spark = SparkSession.builder.getOrCreate()
-    df1 = spark.createDataFrame(input)
+    df1 = spark.createDataFrame(input, schema="test int, test_2 int")
     write_csv(df=df1, path="path")
     mock_load.assert_called_once_with(path="path", mode="overwrite")

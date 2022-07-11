@@ -1,5 +1,3 @@
-import warnings
-
 from pyspark.sql import DataFrame
 
 from spark_pipeline.base.spark_client import SparkClient
@@ -27,19 +25,17 @@ def read_csv(
     )
 
 
-def write_csv(df: DataFrame, path: str) -> None:
+def write_csv(
+    df: DataFrame, path: str, output_partitions: int = 1, mode: str = "append"
+) -> None:
     """Write a Dataframe to a parquet file.
-
-    Warning: This function does not use distributed operation
-    so it might not be a good solution to bigger datasets.
 
     Args:
         df: dataframe to be written.
         path: path to write the file.
+        output_partitions: number of partitions to coalesce before writing.
+            This parameter will control the number generated files in the output path.
+        mode: write mode. E.g. 'append' or 'overwrite'
+
     """
-    warnings.warn(
-        "Warning: This function does not use distributed operation,"
-        "\n"
-        "so it might not be a good solution to bigger datasets."
-    )
-    df.coalesce(1).write.parquet(path=path, mode="overwrite")
+    df.coalesce(output_partitions).write.mode(mode).parquet(path=path, mode="overwrite")

@@ -1,9 +1,10 @@
-from spark_pipeline.deaths_per_year import extract, load, transform
+from spark_pipeline import deaths_per_year_pipeline
 
 
 def main() -> None:
     """Main."""
-    load(transform(extract()))
+    print(">>> Pipeline execution starting...")
+    deaths_per_year_pipeline.run()
     print(">>> Pipeline execution finished!!!")
 
 
